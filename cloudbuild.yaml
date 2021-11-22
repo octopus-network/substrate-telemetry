@@ -1,0 +1,24 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  dir: backend
+  args: 
+  - build
+  - -t
+  - us-central1-docker.pkg.dev/$PROJECT_ID/octopus/$REPO_NAME/backend
+  - -f
+  - Dockerfile
+  - .
+- name: 'gcr.io/cloud-builders/docker'
+  dir: frontend
+  args: 
+  - build
+  - -t
+  - us-central1-docker.pkg.dev/$PROJECT_ID/octopus/$REPO_NAME/frontend
+  - -f
+  - Dockerfile
+  - .
+images:
+- us-central1-docker.pkg.dev/$PROJECT_ID/octopus/$REPO_NAME/backend
+- us-central1-docker.pkg.dev/$PROJECT_ID/octopus/$REPO_NAME/frontend
+options:
+  machineType: 'E2_HIGHCPU_32'
